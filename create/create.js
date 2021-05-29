@@ -33,6 +33,11 @@ document.getElementById("botSalvar").addEventListener ('click', abrirSalvar ,fal
 confimarSalvar.addEventListener ('click', confirmSalvar ,false); 
 confimarCarregar.addEventListener ('click', confirmCarregar ,false);   
 config=localStorage.getItem("config")
+
+
+// variables and conditionals 
+variaveis = []
+
 carregarLocal()
 
 function carregarLocal(){
@@ -61,12 +66,10 @@ function carregarLocal(){
     
 }
 function salvarLocal(){
-    console.log("salvou1")
     cena=exportCenas()
     config.atual.cena=cena
     JSON.stringify(config)
     localStorage.setItem("config",JSON.stringify(config))
-    console.log("salvou2")
 }
 
 function confirmSalvar(){
@@ -420,6 +423,7 @@ function updateLista(num){
  */
 
 function updateLista(){
+    console.log("teste");
     cenasLista=[]
     for(c=0;cenas.length>c;c++){
         nome=cenas[c].getElementsByClassName("cena")[0].value

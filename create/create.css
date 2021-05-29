@@ -229,6 +229,7 @@ body{
 
 .buttonCont{
     position: relative;
+    float: left;
     background-color: #00000042;
     padding: 20px 30px 30px 30px;
     border-radius: 20px;
@@ -365,7 +366,7 @@ textarea::-webkit-scrollbar-thumb{
         transform:translate(0px,0px);
         opacity: 1;
         margin-top: 20px;        
-        height: 146px;
+        min-height: 146px;
         padding: 20px 30px 30px 30px;
     }
 }
