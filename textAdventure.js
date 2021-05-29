@@ -55,8 +55,14 @@ async function changeScene(cenaNome, ani) {
     } else {
         text.style["font-size"] = ""
     }
-    title.innerHTML = cena.titulo
-    text.innerHTML = cena.texto
+    title.innerHTML = cena.titulo;
+    text.innerHTML = cena.texto;
+
+    for(i = 0; i < variaveis.length; i++){
+        console.log(variaveis[i][0]);
+        title.innerHTML = title.innerHTML.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
+        text.innerHTML = text.innerHTML.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
+    }
 
     button = ""
     for (c = 0; cena.opcoes.length > c; c++) {
