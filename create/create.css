@@ -21,7 +21,7 @@ body{
 #by{
     text-decoration: none;
     position: fixed;
-    top: 55px;
+    top: 100px;
     left: 11px;
     font-family: Lato;
     font-size: 20px;
@@ -237,6 +237,16 @@ body{
     animation: ease-in-out spawnButton .15s forwards;
 }
 
+.condicional{
+    position: relative;
+    float: left;
+    background-color: #00000042;
+    padding: 20px 30px 30px 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+    animation: ease-in-out spawnButton .15s forwards;
+}
+
 .buttonDiv{
     margin-top: 20px;
 }
@@ -375,6 +385,32 @@ textarea::-webkit-scrollbar-thumb{
 }
 .killButton{
     animation: ease-in-out killButton .15s forwards;
+}
+
+.link-disabled {
+    text-decoration: none;
+}
+
+.variable-list{
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    margin-top: 45px;
+    height: 45px;
+}
+
+.variable-list ul li {
+    display: inline;
+    background-color: #666f853d;
+    padding: 5px 5px;
+    margin-top: -15px;
+    font-family: Lato;
+    border-radius: 5px;
+}
+
+.text-legenda{
+    color: #fff;
+    font-family: Lato;
 }
 
 @keyframes kill {

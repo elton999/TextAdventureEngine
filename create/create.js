@@ -11,6 +11,10 @@ cenas=document.getElementById("bloco").getElementsByClassName("cenas")
 nomes=document.getElementById("bloco").getElementsByClassName("cena")
 cenaDestino=document.getElementById("bloco").getElementsByClassName("cenaDestino")
 
+conditionalVariable = document.getElementById("bloco").getElementsByClassName("variableInput")
+conditionalType = document.getElementById("bloco").getElementsByClassName("conditionalInput")
+conditionalValue = document.getElementById("bloco").getElementsByClassName("variableValue")
+
 
 cbI=bloco.getElementsByClassName("cb")
 
@@ -28,6 +32,7 @@ document.getElementById("importar").addEventListener('click', confirmImport ,fal
 
 document.getElementById("addCena").addEventListener('click', addTemplate ,false);
 document.getElementById("novo").addEventListener ('click', confirmNovo ,false);
+document.getElementById("newVariable").addEventListener ('click', addVariable ,false);
 document.getElementById("botCarregar").addEventListener ('click', abrirCarregar ,false);
 document.getElementById("botSalvar").addEventListener ('click', abrirSalvar ,false);
 confimarSalvar.addEventListener ('click', confirmSalvar ,false); 
@@ -36,12 +41,13 @@ config=localStorage.getItem("config")
 
 
 // variables and conditionals 
-variaveis = []
+var variaveis = [];
 
 carregarLocal()
 
 function carregarLocal(){
     if(config){
+        variaveis = [];
         config=JSON.parse(config)
         //console.log("config carregadas")
         //console.log(config)
@@ -97,9 +103,6 @@ function confirmSalvar(){
             carregarCenasSalvas()
         }
     }
-        
-    
-    
 
     
 }
@@ -249,6 +252,8 @@ salvarLocal()
 
 function importCenas(cenas){
     key=Object.keys(cenas.cenas)
+    variaveis = cenas.variables;
+    
 
     for(c1=0;key.length>c1;c1++){
         elem=template.cloneNode(true)
@@ -271,6 +276,7 @@ function importCenas(cenas){
         elem.getElementsByClassName("title")[0].value=cenas.cenas[key[c1]].titulo
         elem.getElementsByClassName("text")[0].value=cenas.cenas[key[c1]].texto
         elem.style.backgroundColor=cenas.cenas[key[c1]].color
+
         if(key[c1]==cenas.inicio){
             elem.style.borderColor= "white"
             elem.getElementsByClassName("cb")[0].checked=true
@@ -291,10 +297,28 @@ function importCenas(cenas){
 
             elemButton.getElementsByClassName("cenaDestino")[0].addEventListener("input", isBlackDestino, false);
             elemButton.getElementsByClassName("removeButton")[0].addEventListener ('click', removeButton ,false);
-
+            
 
             elemButton.getElementsByClassName("buttomTexto")[0].value=cenas.cenas[key[c1]].opcoes[c2][0]
             elemDestino=elemButton.getElementsByClassName("cenaDestino")[0]
+
+
+
+            elemButton.getElementsByClassName("variableInput")[0].setAttribute("option-data", cenas.cenas[key[c1]].opcoes[c2][2]["variableInput"]); 
+            elemButton.getElementsByClassName("variableValueInput")[0].value=cenas.cenas[key[c1]].opcoes[c2][2]["variableValueInput"];
+            elemButton.getElementsByClassName("conditionalInput")[0].value=cenas.cenas[key[c1]].opcoes[c2][2]["conditionalInput"];
+
+            elemButton.getElementsByClassName("variableInput")[0].addEventListener("change", salvarLocal, false);
+            elemButton.getElementsByClassName("variableValueInput")[0].addEventListener("change", salvarLocal, false);
+            elemButton.getElementsByClassName("conditionalInput")[0].addEventListener("change", salvarLocal, false);
+            
+
+            elemButton.getElementsByClassName("variableSetValueInput")[0].setAttribute("option-data", cenas.cenas[key[c1]].opcoes[c2][2]["variableSetValueInput"]);
+            elemButton.getElementsByClassName("variableNewValueInput")[0].value=cenas.cenas[key[c1]].opcoes[c2][2]["variableNewValueInput"];
+
+            elemButton.getElementsByClassName("variableSetValueInput")[0].addEventListener("change", salvarLocal, false);
+            elemButton.getElementsByClassName("variableNewValueInput")[0].addEventListener("change", salvarLocal, false);
+
 
             sel=cenas.cenas[key[c1]].opcoes[c2][1]
             
@@ -316,8 +340,21 @@ function importCenas(cenas){
             
             elem.appendChild(elemButton)
         }
-
+        
         bloco.appendChild(elem)
+        setAllVariaveis();
+        addAllSelectVariable();
+    }
+}
+
+function setAllVariaveis(){
+    div = document.getElementsByClassName("variable-list")[0];
+    ul = div.getElementsByTagName("ul")[0];
+    ul.innerHTML = "";
+    if(variaveis){
+        for(var i = 0; i < variaveis.length; i++){
+            ul.innerHTML += ul.innerHTML + "<li onclick=\"deleteVariable(this)\">"+variaveis[i][0]+"="+variaveis[i][1]+"</li>"
+        }
     }
 }
 
@@ -330,7 +367,8 @@ function limparCenas(){
 function exportCenas(erro){
     cenasExport= {
         inicio:"",
-        cenas: {}
+        cenas: {},
+        variables: variaveis
     }
     cenasNome=[]
     for(c=0;cenas.length>c;c++){
@@ -367,12 +405,28 @@ function exportCenas(erro){
         buttomTexto=cenas[c].getElementsByClassName("buttomTexto")
         cenaDestino=cenas[c].getElementsByClassName("cenaDestino")
 
+        variableInput=cenas[c].getElementsByClassName("variableInput")
+        conditionalInput=cenas[c].getElementsByClassName("conditionalInput")
+        variableValueInput=cenas[c].getElementsByClassName("variableValueInput")
+        
+        variableSetValueInput=cenas[c].getElementsByClassName("variableSetValueInput")
+        variableNewValueInput=cenas[c].getElementsByClassName("variableNewValueInput")
+
         for(c2=0;buttomTexto.length>c2;c2++){
             if((cenaDestino[c2].value=="0")&&erro){
                 alert("Não é possivel Exportar!!\nTodos os botões precisam ter destino")
                 return false
             }
-            cenasExport.cenas[nome].opcoes.push([buttomTexto[c2].value,cenaDestino[c2].value])
+            cenasExport.cenas[nome].opcoes.push([
+                buttomTexto[c2].value,
+                cenaDestino[c2].value,
+                    {variableInput: variableInput[c2].value,
+                    conditionalInput: conditionalInput[c2].value,
+                    variableValueInput: variableValueInput[c2].value,
+                    variableSetValueInput: variableSetValueInput[c2].value,
+                    variableNewValueInput: variableNewValueInput[c2].value
+                }
+            ]);
         }
 
     }
@@ -423,7 +477,6 @@ function updateLista(num){
  */
 
 function updateLista(){
-    console.log("teste");
     cenasLista=[]
     for(c=0;cenas.length>c;c++){
         nome=cenas[c].getElementsByClassName("cena")[0].value
@@ -462,9 +515,76 @@ function updateLista(){
             cenaDestino[c].selectedIndex=selI
         }
         
-        
+        addAllSelectVariable();   
+    }
+}
+
+function addAllSelectVariable(){
+    div = document.getElementsByClassName("variable-list")[0];
+    ul = div.getElementsByTagName("ul")[0];
+    li = ul.getElementsByTagName("li");
+
+
+    for(var i = 0; i < li.length; i++){
+        variableName = li[i].innerHTML.split("=")[0];
+        variableValue = li[i].innerHTML.split("=")[0];
     }
 
+    variablesSelect = document.getElementById("bloco").getElementsByClassName("variableInput");
+    for(var v = 0; v < variablesSelect.length; v++){
+        optionsVaribables = '<option value="0">Selecione uma variavel</option>'
+        for(vOptions = 0; vOptions < variaveis.length; vOptions++){
+            variableName = variaveis[vOptions][0];
+            optionsVaribables += "<option value=\""+variableName+"\">"+variableName+"</option>";
+        }
+        variablesSelect[v].innerHTML = optionsVaribables;
+        // to do
+        // melhorar essa opção de busca da base para setar direto no select
+        variablesSelect[v].value = variablesSelect[v].getAttribute("option-data");
+    }
+
+    variablesSelect = document.getElementById("bloco").getElementsByClassName("variableSetValueInput");
+    for(var v = 0; v < variablesSelect.length; v++){
+        optionsVaribables = '<option value="0">Selecione uma variavel</option>'
+        for(vOptions = 0; vOptions < variaveis.length; vOptions++){
+            variableName = variaveis[vOptions][0];
+            optionsVaribables += "<option value=\""+variableName+"\">"+variableName+"</option>";
+        }
+        variablesSelect[v].innerHTML = optionsVaribables;
+        // to do
+        // melhorar essa opção de busca da base para setar direto no select
+        variablesSelect[v].value = variablesSelect[v].getAttribute("option-data");
+    }
+}
+
+function addVariable(){
+    variableName = prompt("qual nome da variavel?");
+    variableValue = prompt ("qual o valor da variavel?");
+    if(variableName != "" && variableValue != ""){
+        div = document.getElementsByClassName("variable-list")[0];
+        ul = div.getElementsByTagName("ul")[0];
+        ul.innerHTML = ul.innerHTML + "<li onclick=\"deleteVariable(this)\">"+ variableName+"="+variableValue+"</li>";
+        console.log(variaveis);
+        variaveis.push([variableName, variableValue]);
+        salvarLocal();
+        addAllSelectVariable();
+    }
+}
+
+function deleteVariable(element){
+    if(confirm("tem certeza que deseja apagar essa variavel?")){
+        console.log(element.innerHTML);
+        current_variable = element.innerHTML.split("=")[0];
+        newVariables = []
+        for(i = 0; i < variaveis.length; i++){
+            if(variaveis[i][0] != current_variable)
+                newVariables.push(variaveis[i]);
+        }
+        variaveis = newVariables;
+
+        setAllVariaveis();
+        salvarLocal();
+    }
 }
 
 

@@ -10,19 +10,29 @@
 <body>
     <a id="by" href="https://www.twitch.tv/dx___" >Feito por: DX</a>
     <div id="barra">
-        <div class="menu" id="novo">Novo</div>
-        <div class="menu" id="botSalvar" value="Projeto 1">Salvar</div>
+        <a href="#" class="link-disabled menu" id="novo">Novo</a>
+        <a href="#" class="link-disabled menu" id="newVariable">Adicionar Variável</a>
+        <a href="#" class="link-disabled menu" id="botSalvar" value="Projeto 1">Salvar</a>
         <input class="impMenu fechar" id="salvar" ></select>
-        <div class="menu confirmar fechar" id="confimarSalvar">Confimar</div>
+        <a href="#" class="link-disabled menu confirmar fechar" id="confimarSalvar">Confimar</a>
         <div class="menu" id="botCarregar">Carregar</div>
         <select class="impMenu fechar" id="carregar" ></select>
-        <div class="menu confirmar fechar" id="confimarCarregar">Confimar</div>
-        <div id="addCena">Adicionar Cena</div>
+        <a href="#" class=" link-disabled  menu confirmar fechar" id="confimarCarregar">Confimar</a>
+        <a href="#" class="link-disabled" id="addCena">Adicionar Cena</a>
         <div id="barraDireita">
             <div class="menu" id="importar">Importar</div>
             <div class="menu" id="exportar">Exportar</div>
         </div>
     </div>
+
+
+    <div class="variable-list">
+        <ul>
+            <li>variable 1=value 1</li>
+            <li>variable 2=values 2</li>
+        </ul>
+    </div>
+
     <div id="center">
         <div id="bloco"></div>
         <div  id="template">            
@@ -30,7 +40,7 @@
                 <a class="remove" onclick="">x</a>
                 <div class="inical">
                     <input class="cb" type="checkbox">
-                    <a class="textName">Cena Inical</a>
+                    <a class="textName">Cena Inicial</a>
                 </div>                
                 <span class="textName">Cena:</span>
                 <input class="textImp cena" placeholder="Cenas precisam de nome">
@@ -45,7 +55,11 @@
                     <a class="addButton" onclick="">+</a>
                 </div>
             </div>
+
+            
             <div class="buttonCont">
+
+                <!--settings menu-->
                 <a class="removeButton" onclick="">x</a>
                 <span class="textName">Texto:</span>
                 <input class="textImp buttomTexto">
@@ -56,7 +70,36 @@
                     <option value="valor3">Valor 3</option>
                 </select >
 
-                
+                <!-- condicional -->
+                <div class="condicional">
+                    <span class="text-legenda">mostrar apenas se:</span><br/>
+                    <span class="textName">Variavel</span>
+                    <select class="textImp variableInput">
+                        <option value="" selected> selecione uma variavel </option>  
+                    </select>
+                    <span class="textName">Condicional</span>
+                    <select class="textImp conditionalInput">
+                        <option value="" selected> selecione uma condicional </option>
+                        <option value="if_equals">for igual a</option>
+                        <option value="if_different "> for diferente de</option>    
+                    </select>
+                    <span class="textName">valor da condicional</span>
+                    <input class="textImp variableValueInput">
+                </div>
+
+                <div class="condicional">
+                    <span class="text-legenda">se escolher essa opção</span><br/>
+
+                    <span class="textName">mudar valor</span>
+                    <select class="textImp variableSetValueInput">
+                        <option value="" selected> selecione uma variavel </option>  
+                    </select>
+                    <span class="textName">para</span>
+                    <input class="textImp variableNewValueInput">
+                    <span>
+                </div>
+
+
             </div> 
         </div>
     </div>
