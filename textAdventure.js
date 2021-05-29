@@ -60,21 +60,50 @@ async function changeScene(cenaNome, ani) {
 
     button = ""
     for (c = 0; cena.opcoes.length > c; c++) {
-        button = button + "<button onclick='changeScene(\"" + cena.opcoes[c][1] + "\",true)' class=button >" + cena.opcoes[c][0] + "</button>"
+        if(cena.opcoes[c][2]["variableInput"] == "" ){
+            button = button + "<button onclick='changeScene(\"" + cena.opcoes[c][1] + "\",true)' class=button >" + cena.opcoes[c][0] + "</button>"
+        }
+        
+        if(cena.opcoes[c][2]["variableInput"] != "" ){
+            
+            for(var i = 0; i < variaveis.length; i++){
+                console.log(cena.opcoes[c][2]["conditionalInput"]);
+                if(
+                    (cena.opcoes[c][2]["variableInput"] == variaveis[i][0] && cena.opcoes[c][2]["variableValueInput"] == variaveis[i][1] && cena.opcoes[c][2]["conditionalInput"] ==  "if_equals") ||
+                    (cena.opcoes[c][2]["variableInput"] == variaveis[i][0] && cena.opcoes[c][2]["variableValueInput"] != variaveis[i][1] && cena.opcoes[c][2]["conditionalInput"] ==  "if_different"))
+                    if(cena.opcoes[c][2]["variableSetValueInput"] != "")
+                        button = button + "<button onclick='addValue(\""+cena.opcoes[c][2]["variableSetValueInput"] +"\", \""+cena.opcoes[c][2]["variableNewValueInput"] +"\");  changeScene(\"" + cena.opcoes[c][1] + "\",true)' class=button >" + cena.opcoes[c][0] + "</button>"
+                    else
+                        button = button + "<button onclick='changeScene(\"" + cena.opcoes[c][1] + "\",true)' class=button >" + cena.opcoes[c][0] + "</button>"
+            }
+        }
     }
     buttons.innerHTML = button
     bloco.style.opacity = 1
 
 
 }
+
+function addValue(variable, value){
+    for(i = 0; i < variaveis.length; i++){
+        if(variaveis[i][0] == variable){
+            variaveis[i][1] = value;
+        }
+    }
+}
+
 //console.log(JSON.stringify(cenas))
 //console.log(document.location.hash)
 hash = decodeURI(document.location.hash)
 //console.log(hash)
+var variaveis = [];
+
 var match = hash.match(/#cenas=([^&]+)/);
 if (match) {
     cenas=JSON.parse(match[1])
-    changeScene(cenas.inicio)    
+    variaveis = cenas.variables;
+    changeScene(cenas.inicio);
+    
 }else{
     window.location.href = editorLink;
 }
