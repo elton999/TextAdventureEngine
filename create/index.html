@@ -10,26 +10,24 @@
 <body>
     <a id="by" href="https://www.twitch.tv/dx___" >Feito por: DX</a>
     <div id="barra">
-        <a href="#" class="link-disabled menu" id="novo">Novo</a>
+        <a href="#" class="link-disabled menu" id="buttonNew">Novo</a>
         <a href="#" class="link-disabled menu" id="newVariable">Adicionar Variável</a>
-        <a href="#" class="link-disabled menu" id="botSalvar" value="Projeto 1">Salvar</a>
+        <a href="#" class="link-disabled  menu" id="buttonSave" value="Projeto 1">Salvar</a>
         <input class="impMenu fechar" id="salvar" ></select>
-        <a href="#" class="link-disabled menu confirmar fechar" id="confimarSalvar">Confimar</a>
-        <div class="menu" id="botCarregar">Carregar</div>
+        <a href="#" class="link-disabled  menu confirmar fechar" id="confirmSave">Confimar</a>
+        <a href="#" class="link-disabled  menu" id="buttonLoad">Carregar</a>
         <select class="impMenu fechar" id="carregar" ></select>
-        <a href="#" class=" link-disabled  menu confirmar fechar" id="confimarCarregar">Confimar</a>
-        <a href="#" class="link-disabled" id="addCena">Adicionar Cena</a>
+        <a href="#" class="link-disabled menu confirmar fechar" id="confirmLoad">Confimar</a>
+        <a href="#" class="link-disabled " id="addScene">Adicionar Cena</a>
         <div id="barraDireita">
-            <div class="menu" id="importar">Importar</div>
-            <div class="menu" id="exportar">Exportar</div>
+            <a href="#" class="link-disabled menu" id="buttonImport">Importar</a>
+            <a href="#" class="link-disabled menu" id="buttonExport">Exportar</a>
         </div>
     </div>
 
 
     <div class="variable-list">
         <ul>
-            <li>variable 1=value 1</li>
-            <li>variable 2=values 2</li>
         </ul>
     </div>
 
@@ -40,18 +38,19 @@
                 <a class="remove" onclick="">x</a>
                 <div class="inical">
                     <input class="cb" type="checkbox">
-                    <a class="textName">Cena Inicial</a>
+                    <a class="textName" id="InitialSceneLabel">Cena Inicial</a>
                 </div>                
-                <span class="textName">Cena:</span>
+                <span class="textName" id="SceneLabel">Cena:</span>
                 <input class="textImp cena" placeholder="Cenas precisam de nome">
-                <span class="textName">Cor:</span>
+                <span class="textName" id="colorLabel">Cor:</span>
                 <input class="color"  type="color" value="#2e5e76"></textarea>
-                <span class="textName">Titulo:</span>
+                <span class="textName" id="titleLabel">Titulo:</span>
                 <input class="textImp title" >
-                <span class="textName">Texto:</span>
+                <span class="textName" id="textLabel">Texto:</span>
+
                 <textarea class="textImp text" rows="2" cols="10" style="min-height: 60px;"></textarea>
                 <div class="buttonDiv">
-                    <a class="textName">Botões</a>
+                    <a class="textName" id="buttonLabel">Botões</a>
                     <a class="addButton" onclick="">+</a>
                 </div>
             </div>
@@ -61,13 +60,10 @@
 
                 <!--settings menu-->
                 <a class="removeButton" onclick="">x</a>
-                <span class="textName">Texto:</span>
-                <input class="textImp buttomTexto">
-                <span class="textName">Cena destino:</span>
-                <select  class="textImp cenaDestino" >
-                    <option value="" selected>Insira a cenas destino</option>
-                    <option value="valor2" >Valor 2</option>
-                    <option value="valor3">Valor 3</option>
+                <span class="textName" id="buttonTextLabel">Texto:</span>
+                <input class="textImp buttomTexto"></input>
+                <span class="textName" id="buttonDestinationLabel">Cena destino:</span>
+                <select  class="textImp cenaDestino">
                 </select >
 
                 <!-- condicional -->
