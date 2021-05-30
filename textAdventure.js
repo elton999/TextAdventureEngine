@@ -59,12 +59,12 @@ async function changeScene(cenaNome, ani) {
     //title.innerHTML = cena.titulo;
     //text.innerHTML = cena.texto;
 
-    tituloTextPure = "";
-    textTextPure = "";
+    tituloTextPure = cena.titulo;
+    textTextPure = cena.texto;
 
     for(i = 0; i < variaveis.length; i++){
         tituloTextPure = cena.titulo.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
-        textTextPure = cena.text.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
+        textTextPure = cena.texto.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
     }
 
     title.innerHTML = tituloTextPure.replace(/</g, "&lt;").replace(/>/g, "&gt;");
