@@ -9,7 +9,8 @@
             "confirmLoad":"Confirm",
             "buttonImport":"Import",
             "buttonExport":"Export",
-            "addScene":"Add Scene"
+            "addScene":"Add Scene",
+            "newVariable" : "New Variable"
         },
         "scene":{
             "InitialSceneLabel":"Initial Scene",
@@ -62,7 +63,8 @@
             "confirmLoad":"Confimar",
             "buttonImport":"Importar",
             "buttonExport":"Exportar",
-            "addScene":"Adicionar Cena"
+            "addScene":"Adicionar Cena",
+            "newVariable" : "Nova Variável"
         },
         "scene":{
             "InitialSceneLabel":"Cena Inicial",
