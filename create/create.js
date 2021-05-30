@@ -1,6 +1,6 @@
 //cenas={}
 
-engineLink="https://dx3006.github.io/TextAdventureEngine/"
+//engineLink="https://dx3006.github.io/TextAdventureEngine/"
 
 numeroCena=1
 
