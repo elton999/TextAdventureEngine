@@ -2,6 +2,7 @@ cena = {}
 //cenas={}
 
 //editorLink="https://dx3006.github.io/TextAdventureEngine/create/"
+editorLink="https://elton999.github.io/TextAdventureEngine/create/"
 
 function init() {
 
