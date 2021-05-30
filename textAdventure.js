@@ -56,14 +56,19 @@ async function changeScene(cenaNome, ani) {
     } else {
         text.style["font-size"] = ""
     }
-    title.innerHTML = cena.titulo;
-    text.innerHTML = cena.texto;
+    //title.innerHTML = cena.titulo;
+    //text.innerHTML = cena.texto;
+
+    tituloTextPure = "";
+    textTextPure = "";
 
     for(i = 0; i < variaveis.length; i++){
-        console.log(variaveis[i][0]);
-        title.innerHTML = title.innerHTML.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
-        text.innerHTML = text.innerHTML.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
+        tituloTextPure = cena.titulo.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
+        textTextPure = cena.text.replace("["+variaveis[i][0]+"]", variaveis[i][1]);
     }
+
+    title.innerHTML = tituloTextPure.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    text.innerHTML = textTextPure.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
     button = ""
     for (c = 0; cena.opcoes.length > c; c++) {
