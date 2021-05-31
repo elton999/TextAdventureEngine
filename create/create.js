@@ -566,7 +566,7 @@ function addAllSelectVariable(){
 function addVariable(){
     variableName = prompt("qual nome da variavel?");
     variableValue = prompt ("qual o valor da variavel?");
-    if(variableName != "" && variableValue != ""){
+    if(variableName != "" && variableValue != "" && variableName != null && variableValue != null){
         div = document.getElementsByClassName("variable-list")[0];
         ul = div.getElementsByTagName("ul")[0];
         ul.innerHTML = ul.innerHTML + "<li onclick=\"deleteVariable(this)\">"+ variableName+"="+variableValue+"</li>";
