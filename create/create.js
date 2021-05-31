@@ -35,6 +35,8 @@ document.getElementById("addScene").addEventListener('click', addTemplate ,false
 document.getElementById("buttonNew").addEventListener ('click', confirmNovo ,false);
 document.getElementById("buttonLoad").addEventListener ('click', abrirCarregar ,false);
 document.getElementById("buttonSave").addEventListener ('click', abrirSalvar ,false);
+document.getElementById("newVariable").addEventListener('click', addVariable, false);
+
 confimarSalvar.addEventListener ('click', confirmSalvar ,false); 
 confimarCarregar.addEventListener ('click', confirmCarregar ,false);   
 config=localStorage.getItem("config")
